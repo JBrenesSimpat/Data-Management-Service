@@ -9,7 +9,7 @@ on:
     branches:
       - main
     tags:
-      - "v*.*.*"
+      - "dms-v*.*.*"
 
 env:
   API_URL: https://api.github.com/repos/${{ github.repository }}
@@ -44,7 +44,7 @@ jobs:
       - name: Create Dms API Pre-Release
         run: |
           $version = "${{ steps.versions.outputs.dms-semver }}"
-          $tag = $version -replace "v","dms-pre-"
+          $tag = $version -replace "dms-v","dms-pre-"
 
           $body = @{
             tag_name = "$tag"
