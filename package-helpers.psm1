@@ -19,13 +19,13 @@ function Get-VersionNumber {
     # Install the MinVer CLI tool
     &dotnet tool install --global minver-cli
 
-    $version = $(&minver)
+    $version = $(&minver -t $prefix)
 
     Write-Output "The Version is"
     Write-Output $version
 
     "dms-v=$version" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
-    "dms-semver=$($version)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+    "dms-semver=dms-v$($version)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 }
 
 <#
