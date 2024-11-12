@@ -14,7 +14,7 @@ and the number of commits since then.
 #>
 function Get-VersionNumber {
 
-    $prefix = "dms-v"
+    $prefix = "v"
 
     # Install the MinVer CLI tool
     &dotnet tool install --global minver-cli
