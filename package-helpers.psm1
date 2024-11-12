@@ -18,10 +18,12 @@ function Get-VersionNumber {
         $projectPrefix = "dms"
     )
 
+    $prefix = "v"
+
     # Install the MinVer CLI tool
     &dotnet tool install --global minver-cli
 
-    $version = $(&minver)
+    $version = $(&minver -t $prefix)
 
     Write-Output "The Version is"
     Write-Output $version
