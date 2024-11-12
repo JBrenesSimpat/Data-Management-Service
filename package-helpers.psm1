@@ -13,19 +13,23 @@ Builds a pre-release version number based on the last tag in the commit history
 and the number of commits since then.
 #>
 function Get-VersionNumber {
+    param (
+        [string]
+        $projectPrefix = "dms"
+    )
 
     $prefix = "v"
 
     # Install the MinVer CLI tool
     &dotnet tool install --global minver-cli
 
-    $version = $(&minver -t $prefix)
+    $version = $(&minver)
 
     Write-Output "The Version is"
     Write-Output $version
 
-    "dms-v=$version" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
-    "dms-semver=dms-v$($version)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+    "$projectPrefix-v=$version" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+    "dms-semver=$projectPrefix-v$($version)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 }
 
 <#
