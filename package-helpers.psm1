@@ -20,13 +20,10 @@ function Get-VersionNumber {
 
     $prefix = "v"
 
-    # Elimina cualquier prefijo de MinVer, solo queremos usar "v" para las versiones
-    $env:MINVER_TAG_PREFIX = "v"
-
     # Install the MinVer CLI tool
     &dotnet tool install --global minver-cli
 
-    $version = &minver
+    $version = $(&minver -t $prefix)
 
     Write-Output "The Version is"
     Write-Output $version
