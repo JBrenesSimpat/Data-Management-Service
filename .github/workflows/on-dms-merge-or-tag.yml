@@ -22,7 +22,6 @@ permissions: read-all
 jobs:
   create-pre-releases:
     name: Create Pre-Releases
-
     runs-on: ubuntu-latest
     defaults:
       run:

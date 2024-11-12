@@ -45,7 +45,7 @@ jobs:
       - name: Create CS API Pre-Release
         run: |
           $version = "${{ steps.versions.outputs.dms-semver }}"
-          $tag = $version -replace "v","cs-pre-"
+          $tag = $version -replace "cs-v","cs-pre-"
 
           $body = @{
             tag_name = "$tag"
