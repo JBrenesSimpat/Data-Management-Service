@@ -14,13 +14,14 @@ and the number of commits since then.
 #>
 function Get-VersionNumber {
 
-    $prefix = "v"
+    $prefix = "dms-v"
 
     # Install the MinVer CLI tool
     &dotnet tool install --global minver-cli
 
     $version = $(&minver -t $prefix)
 
+    Write-Output "The Version is"
     Write-Output $version
 
     "dms-v=$version" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
