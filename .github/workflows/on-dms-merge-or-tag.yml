@@ -22,6 +22,7 @@ permissions: read-all
 jobs:
   create-pre-releases:
     name: Create Pre-Releases
+    if: "! contains(github.ref_name, 'alpha')"
     runs-on: ubuntu-latest
     defaults:
       run:
