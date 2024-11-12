@@ -9,7 +9,7 @@ on:
     branches:
       - main
     tags:
-      - "dms-v*.*.*"
+      - "v*.*.*"
     paths:
       - "src/dms/**"
 
