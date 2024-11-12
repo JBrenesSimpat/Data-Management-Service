@@ -18,8 +18,6 @@ function Get-VersionNumber {
         $projectPrefix = "dms"
     )
 
-    $prefix = "v"
-
     # Install the MinVer CLI tool
     &dotnet tool install --global minver-cli
 
@@ -28,8 +26,13 @@ function Get-VersionNumber {
     Write-Output "The Version is"
     Write-Output $version
 
-    "$projectPrefix-v=$version" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
-    "dms-semver=$projectPrefix-v$($version)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+    "dms-v=$version" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+
+    $dmsSemver = "$projectPrefix-v$($version)"
+    "dms-semver=$dmsSemver" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+
+    Write-Output "dms-v is set to: $version"
+    Write-Output "dms-semver is set to: $dmsSemver"
 }
 
 <#
