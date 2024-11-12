@@ -23,7 +23,7 @@ function Get-VersionNumber {
     # Install the MinVer CLI tool
     &dotnet tool install --global minver-cli
 
-    $version = $(&minver --tag)
+    $version = &minver
 
     Write-Output "The Version is"
     Write-Output $version
