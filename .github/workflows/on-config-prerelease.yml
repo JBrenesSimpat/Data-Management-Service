@@ -33,10 +33,10 @@ jobs:
         run: |
           if [[ "${{ github.event.release.tag_name }}" == cs-* ]]; then
             echo "Tag is valid."
-            echo "::set-output name=is_valid::true"
+            echo "is_valid=true" >> $GITHUB_OUTPUT
           else
             echo "Tag is not valid."
-            echo "::set-output name=is_valid::false"
+            echo "is_valid=false" >> $GITHUB_OUTPUT
           fi
 
   pack:
