@@ -26,21 +26,22 @@ jobs:
   check_tag:
     runs-on: ubuntu-latest
     outputs:
-      valid_tag: ${{ steps.check.outputs.is_valid }}
+      valid_tag: ${{ steps.check.outputs.valid_tag }}
     steps:
       - name: Check tag prefix
         id: check
         run: |
           if [[ "${{ github.event.release.tag_name }}" == cs-* ]]; then
             echo "Tag is valid."
-            echo "is_valid=true" >> $GITHUB_OUTPUT
+            echo "valid_tag=true" >> $GITHUB_OUTPUT
           else
             echo "Tag is not valid."
-            echo "is_valid=false" >> $GITHUB_OUTPUT
+            echo "valid_tag=false" >> $GITHUB_OUTPUT
           fi
 
   pack:
     name: Build and Pack
+    needs: check_tag
     if: needs.check_tag.outputs.valid_tag == 'true'
     runs-on: ubuntu-latest
     defaults:
