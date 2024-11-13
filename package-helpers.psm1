@@ -66,11 +66,14 @@ function Invoke-Promote {
 
         # Git ref (short) for the release tag ex: v1.3.5
         [Parameter(Mandatory = $true)]
-        $ReleaseRef
+        $ReleaseRef,
+
+        # Name of the Package
+        [Parameter(Mandatory = $true)]
+        [String]
+        $PackageName
     )
 
-
-    $package = "EdFi.DataManagementService"
     $version = $ReleaseRef -replace "v", ""
 
     $body = @{
@@ -80,7 +83,7 @@ function Invoke-Promote {
         operation = 0
         packages  = @(
             @{
-                id = $package
+                id = $PackageName
                 version = $version
             }
         )
