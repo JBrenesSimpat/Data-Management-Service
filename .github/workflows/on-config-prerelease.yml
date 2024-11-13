@@ -46,7 +46,7 @@ jobs:
 
       - name: Publish .NET Assemblies
         run: |
-          $packageVersion = "${{ steps.versions.outputs.dms-semver }}"
+          $packageVersion = "${{ steps.versions.outputs.dms-semver }}" -replace "cs-v", ""
 
           ./build-config.ps1 -Command BuildAndPublish `
               -Configuration Release `
