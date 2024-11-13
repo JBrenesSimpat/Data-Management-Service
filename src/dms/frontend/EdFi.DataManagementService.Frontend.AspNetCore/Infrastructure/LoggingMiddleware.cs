@@ -30,7 +30,7 @@ public class LoggingMiddleware(RequestDelegate next)
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Unknown Error - {TraceId}", context.TraceIdentifier);
+            logger.LogError(ex, "Unknown Error: - {TraceId}", context.TraceIdentifier);
 
             var response = context.Response;
             if (!response.HasStarted)
