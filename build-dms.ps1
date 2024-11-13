@@ -107,6 +107,8 @@ function DotNetClean {
 }
 
 function Restore {
+    Write-Output "Restore:"
+    Write-Output $defaultSolution
     Invoke-Execute { dotnet restore $defaultSolution }
 }
 
@@ -310,6 +312,7 @@ function Invoke-SetAssemblyInfo {
 }
 
 function Invoke-Publish {
+    Write-Output "Invoke-Publish"
     Write-Output "Building Version ($DMSVersion)"
 
     Invoke-Step { PublishApi }
