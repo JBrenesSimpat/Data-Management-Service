@@ -107,17 +107,12 @@ function DotNetClean {
 }
 
 function Restore {
-    Write-Output "Restore:"
-    Write-Output $defaultSolution
     Invoke-Execute { dotnet restore $defaultSolution }
 }
 
 function SetDMSAssemblyInfo {
     Invoke-Execute {
         $assembly_version = $DMSVersion
-
-        Write-Output "SetDMSAssemblyInfo : DMSVersion"
-        Write-Output $DMSVersion
 
         Invoke-RegenerateFile "$solutionRoot/Directory.Build.props" @"
 <Project>
@@ -138,8 +133,6 @@ function SetDMSAssemblyInfo {
 }
 
 function Compile {
-    Write-Output "Compile"
-    Write-Output $defaultSolution
     Invoke-Execute {
         dotnet build $defaultSolution -c $Configuration --nologo --no-restore
     }
@@ -314,7 +307,6 @@ function Invoke-SetAssemblyInfo {
 }
 
 function Invoke-Publish {
-    Write-Output "Invoke-Publish"
     Write-Output "Building Version ($DMSVersion)"
 
     Invoke-Step { PublishApi }

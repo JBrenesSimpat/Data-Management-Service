@@ -65,14 +65,15 @@ jobs:
         run: |
           "hash-code=$(sha256sum *.nupkg | base64 -w0)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
-      - name: Upload Packages as Artifacts
-        if: success()
-        uses: actions/upload-artifact@26f96dfa697d77e81fd5907df203aa23a56210a8 # v4.3.0
-        with:
-          name: "${{ env.PACKAGE_NAME }}-NuGet"
-          path: ${{ github.workspace }}/*.nupkg
-          if-no-files-found: error
-          retention-days: 30
+    # JB -> Comment for now
+    #  - name: Upload Packages as Artifacts
+    #    if: success()
+    #    uses: actions/upload-artifact@26f96dfa697d77e81fd5907df203aa23a56210a8 # v4.3.0
+    #    with:
+    #      name: "${{ env.PACKAGE_NAME }}-NuGet"
+    #      path: ${{ github.workspace }}/*.nupkg
+    #      if-no-files-found: error
+    #      retention-days: 30
 
   sbom-create:
     name: Create SBOM
@@ -211,18 +212,19 @@ jobs:
       - name: Install-credential-handler
         run: iex "& { $(irm https://aka.ms/install-artifacts-credprovider.ps1) } -AddNetfx"
 
-      - name: Push Package to Azure Artifacts
-        run: |
-         $artifact = (Get-ChildItem -Path $_ -Name -Include *.nupkg)
-         $arguments = @{
-           EdFiNuGetFeed = "${{ env.ARTIFACTS_FEED_URL }}"
-           NuGetApiKey = "${{ env.ARTIFACTS_API_KEY }}"
-         }
+    # JB -> Comment for now
+    #  - name: Push Package to Azure Artifacts
+    #    run: |
+    #     $artifact = (Get-ChildItem -Path $_ -Name -Include *.nupkg)
+    #     $arguments = @{
+    #       EdFiNuGetFeed = "${{ env.ARTIFACTS_FEED_URL }}"
+    #       NuGetApiKey = "${{ env.ARTIFACTS_API_KEY }}"
+    #     }
 
-         $artifact | ForEach-Object {
-             $arguments.PackageFile = $_
-             ./build-dms.ps1 Push @arguments
-          }
+    #     $artifact | ForEach-Object {
+    #         $arguments.PackageFile = $_
+    #         ./build-dms.ps1 Push @arguments
+    #      }
 
   docker-publish:
     name: Publish to Docker Hub
@@ -271,14 +273,15 @@ jobs:
         with:
           images: ${{ env.IMAGE_NAME }}
 
-      - name: Build and push DMS image
-        uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09  # v5.0.0
-        with:
-          context: "{{defaultContext}}:src/dms"
-          cache-from: type=registry,ref=${{ env.IMAGE_NAME }}:pre
-          cache-to: type=inline
-          build-args: VERSION=${{ steps.prepare-tags.outputs.VERSION }}
-          file: Nuget.Dockerfile
-          tags: ${{ steps.prepare-tags.outputs.DMSTAGS }}
-          labels: ${{ steps.metadatamanagementservice.outputs.labels }}
-          push: true
+    # JB -> Comment for now
+    #  - name: Build and push DMS image
+    #    uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09  # v5.0.0
+    #    with:
+    #      context: "{{defaultContext}}:src/dms"
+    #      cache-from: type=registry,ref=${{ env.IMAGE_NAME }}:pre
+    #      cache-to: type=inline
+    #      build-args: VERSION=${{ steps.prepare-tags.outputs.VERSION }}
+    #      file: Nuget.Dockerfile
+    #      tags: ${{ steps.prepare-tags.outputs.DMSTAGS }}
+    #      labels: ${{ steps.metadatamanagementservice.outputs.labels }}
+    #      push: true
