@@ -138,6 +138,8 @@ function SetDMSAssemblyInfo {
 }
 
 function Compile {
+    Write-Output "Compile"
+    Write-Output $defaultSolution
     Invoke-Execute {
         dotnet build $defaultSolution -c $Configuration --nologo --no-restore
     }
