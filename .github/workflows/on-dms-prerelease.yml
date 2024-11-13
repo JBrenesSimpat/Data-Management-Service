@@ -42,7 +42,7 @@ jobs:
         id: versions
         run: |
           Import-Module ./package-helpers.psm1
-          Get-VersionNumber -projectPrefix "cs"
+          Get-VersionNumber -projectPrefix "dms"
 
       - name: Publish .NET Assemblies
         run: |
