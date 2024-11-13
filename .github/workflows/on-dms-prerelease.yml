@@ -9,7 +9,7 @@ on:
     types:
       - prereleased
 
-    if: startsWith(github.event.release.tag_name, 'cs-')
+    if: startsWith(github.event.release.tag_name, 'dms-')
 
 env:
   ARTIFACTS_API_KEY: ${{ secrets.AZURE_ARTIFACTS_PERSONAL_ACCESS_TOKEN }}
