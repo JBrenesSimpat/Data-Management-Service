@@ -23,8 +23,25 @@ env:
 permissions: read-all
 
 jobs:
+  check_tag:
+    runs-on: ubuntu-latest
+    outputs:
+      valid_tag: ${{ steps.check.outputs.is_valid }}
+    steps:
+      - name: Check tag prefix
+        id: check
+        run: |
+          if [[ "${{ github.event.release.tag_name }}" == cs-* ]]; then
+            echo "Tag is valid."
+            echo "::set-output name=is_valid::true"
+          else
+            echo "Tag is not valid."
+            echo "::set-output name=is_valid::false"
+          fi
+
   pack:
     name: Build and Pack
+    if: needs.check_tag.outputs.valid_tag == 'true'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -77,6 +94,7 @@ jobs:
 
   sbom-create:
     name: Create SBOM
+    if: needs.check_tag.outputs.valid_tag == 'true'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -135,6 +153,7 @@ jobs:
 
   sbom-attach:
     name: Attach SBOM file
+    if: needs.check_tag.outputs.valid_tag == 'true'
     runs-on: ubuntu-latest
     needs:
       - sbom-create
@@ -181,6 +200,7 @@ jobs:
 
   provenance-create:
     name: Create Provenance
+    if: needs.check_tag.outputs.valid_tag == 'true'
     needs: pack
     permissions:
       actions: read
@@ -196,6 +216,7 @@ jobs:
 
   publish-package:
     name: Publish NuGet Package
+    if: needs.check_tag.outputs.valid_tag == 'true'
     needs: pack
     runs-on: ubuntu-latest
     defaults:
@@ -228,6 +249,7 @@ jobs:
 
   docker-publish:
     name: Publish to Docker Hub
+    if: needs.check_tag.outputs.valid_tag == 'true'
     runs-on: ubuntu-latest
     needs:
       - publish-package
