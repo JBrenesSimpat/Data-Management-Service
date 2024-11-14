@@ -57,7 +57,7 @@ jobs:
 
       - name: Create DMS NuGet Package
         run: |
-          $packageVersion = "${{ steps.versions.outputs.dms-semver }}"
+          $packageVersion = "${{ steps.versions.outputs.dms-semver }}" -replace "dms-v", ""
 
           ./build-dms.ps1 -Command Package `
               -DMSVersion $packageVersion `
@@ -321,7 +321,7 @@ jobs:
 
       - name: Create Config NuGet Package
         run: |
-          $packageVersion = "${{ steps.versions.outputs.dms-semver }}"
+          $packageVersion = "${{ steps.versions.outputs.dms-semver }}" -replace "cs-v", ""
 
           ./build-config.ps1 -Command Package `
               -DmsCSVersion $packageVersion `
