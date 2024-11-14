@@ -68,15 +68,14 @@ jobs:
         run: |
           "hash-code=$(sha256sum *.nupkg | base64 -w0)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
-    # JB -> Comment for now
-    #  - name: Upload DMS Packages as Artifacts
-    #    if: success()
-    #    uses: actions/upload-artifact@26f96dfa697d77e81fd5907df203aa23a56210a8 # v4.3.0
-    #    with:
-    #      name: "${{ env.DMS_PACKAGE_NAME }}-NuGet"
-    #      path: ${{ github.workspace }}/*.nupkg
-    #      if-no-files-found: error
-    #      retention-days: 30
+      - name: Upload DMS Packages as Artifacts
+        if: success()
+        uses: actions/upload-artifact@26f96dfa697d77e81fd5907df203aa23a56210a8 # v4.3.0
+        with:
+          name: "${{ env.DMS_PACKAGE_NAME }}-NuGet"
+          path: ${{ github.workspace }}/*.nupkg
+          if-no-files-found: error
+          retention-days: 30
 
   sbom-create-dms:
     name: Create DMS SBOM
@@ -333,15 +332,14 @@ jobs:
         run: |
           "hash-code=$(sha256sum *.nupkg | base64 -w0)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
-    # JB -> Comment for now
-    #  - name: Upload Config Packages as Artifacts
-    #    if: success()
-    #    uses: actions/upload-artifact@26f96dfa697d77e81fd5907df203aa23a56210a8 # v4.3.0
-    #    with:
-    #      name: "${{ env.CS_PACKAGE_NAME }}-NuGet"
-    #      path: ${{ github.workspace }}/*.nupkg
-    #      if-no-files-found: error
-    #      retention-days: 30
+      - name: Upload Config Packages as Artifacts
+        if: success()
+        uses: actions/upload-artifact@26f96dfa697d77e81fd5907df203aa23a56210a8 # v4.3.0
+        with:
+          name: "${{ env.CS_PACKAGE_NAME }}-NuGet"
+          path: ${{ github.workspace }}/*.nupkg
+          if-no-files-found: error
+          retention-days: 30
 
   sbom-create-cs:
     name: Create Config SBOM
