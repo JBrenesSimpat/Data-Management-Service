@@ -100,7 +100,7 @@ internal static class FailureResponse
         CreateBaseJsonObject(
             detail: "",
             type: $"{_badRequestTypePrefix}:data-validation-failed",
-            title: "Data Validation Failed.",
+            title: "Data Validation Failed",
             status: 400,
             correlationId: correlationId,
             validationFailures

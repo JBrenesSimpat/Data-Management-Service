@@ -18,7 +18,7 @@ public class ApplicationHealthCheck(ILogger<ApplicationHealthCheck> logger) : IH
     {
         try
         {
-            return Task.FromResult(HealthCheckResult.Healthy("Application is up and running."));
+            return Task.FromResult(HealthCheckResult.Healthy("Application is up and running"));
         }
         catch (Exception e)
         {
