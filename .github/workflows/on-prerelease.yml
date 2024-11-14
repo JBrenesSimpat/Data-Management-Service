@@ -93,7 +93,7 @@ jobs:
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
 
-      - name: Get Artifacts
+      - name: Get DMS Artifacts
         uses: actions/download-artifact@6b208ae046db98c579e8a3aa621ab581ff575935 #v4.1.1
         with:
           name: ${{ env.DMS_PACKAGE_NAME }}-NuGet
@@ -137,7 +137,7 @@ jobs:
           echo "sbom-hash-code=$sbom_hash" >> $GITHUB_OUTPUT
 
   sbom-attach-dms:
-    name: Attach SBOM file
+    name: Attach DMS SBOM file
     runs-on: ubuntu-latest
     needs:
       - sbom-create-dms
@@ -146,7 +146,7 @@ jobs:
       actions: read
       contents: write
     steps:
-      - name: Download the DMS SBOM
+      - name: Download DMS SBOM
         uses: Ed-Fi-Alliance-OSS/slsa-github-generator/.github/actions/secure-download-artifact@v2.0.0
         with:
           name: "${{ env.DMS_PACKAGE_NAME }}-SBOM"
@@ -183,7 +183,7 @@ jobs:
               -InFile $uploadName
 
   provenance-create-dms:
-    name: Create Provenance for DMS
+    name: Create DMS Provenance
     needs: pack-dms
     permissions:
       actions: read
@@ -239,7 +239,7 @@ jobs:
         # Give Azure Artifacts caching a moment to catch up
         run: sleep 20
 
-      - name: Prepare Tags for DMS
+      - name: Prepare DMS Tags
         id: prepare-tags
         run: |
           REF="${{ env.REF }}"
@@ -358,7 +358,7 @@ jobs:
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
 
-      - name: Get Artifacts
+      - name: Get Config Artifacts
         uses: actions/download-artifact@6b208ae046db98c579e8a3aa621ab581ff575935 #v4.1.1
         with:
           name: ${{ env.CS_PACKAGE_NAME }}-NuGet
@@ -402,7 +402,7 @@ jobs:
           echo "sbom-hash-code=$sbom_hash" >> $GITHUB_OUTPUT
 
   sbom-attach-cs:
-    name: Attach SBOM file
+    name: Attach Config SBOM file
     runs-on: ubuntu-latest
     needs:
       - sbom-create-cs
@@ -411,7 +411,7 @@ jobs:
       actions: read
       contents: write
     steps:
-      - name: Download the Config SBOM
+      - name: Download Config SBOM
         uses: Ed-Fi-Alliance-OSS/slsa-github-generator/.github/actions/secure-download-artifact@v2.0.0
         with:
           name: "${{ env.CS_PACKAGE_NAME }}-SBOM"
@@ -448,7 +448,7 @@ jobs:
               -InFile $uploadName
 
   provenance-create-cs:
-    name: Create Provenance for Config
+    name: Create Config Provenance
     needs: pack-cs
     permissions:
       actions: read
@@ -504,7 +504,7 @@ jobs:
         # Give Azure Artifacts caching a moment to catch up
         run: sleep 20
 
-      - name: Prepare Tags for Config
+      - name: Prepare Config Tags
         id: prepare-tags
         run: |
           REF="${{ env.REF }}"
