@@ -163,7 +163,7 @@ jobs:
         run: |
           $release = "${{ github.ref_name }}"
           $repo = "${{ github.repository }}"
-          $token = "${{ secrets.GITHUB_TOKEN }}"
+          $token = "${{ secrets.TOKEN }}"
           $file = "${{ env.MANIFEST_FILE }}"
           $uploadName = "${{ env.DMS_PACKAGE_NAME }}-SBOM.zip"
 
@@ -431,7 +431,7 @@ jobs:
         run: |
           $release = "${{ github.ref_name }}"
           $repo = "${{ github.repository }}"
-          $token = "${{ secrets.GITHUB_TOKEN }}"
+          $token = "${{ secrets.TOKEN }}"
           $file = "${{ env.MANIFEST_FILE }}"
           $uploadName = "${{ env.CS_PACKAGE_NAME }}-SBOM.zip"
 
