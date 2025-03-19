@@ -257,8 +257,9 @@ jobs:
             # Releases get the version, plus shortened form for minor release.
             # We are not using shortened form for major or using "latest"
             # because they are too imprecise.
+            IMAGE_NAME_CLEAN=$(echo "${{ env.IMAGE_NAME }}" | sed 's/^dms-pre-//; s/^cs-pre-//')
             MINOR=`echo ${PACKAGEVERSION} | awk -F"." '{print $1"."$2}'`
-            DMSTAGS="${{ env.IMAGE_NAME }}:${PACKAGEVERSION},${{ env.IMAGE_NAME }}:${MINOR}"
+            DMSTAGS="${IMAGE_NAME_CLEAN}:${PACKAGEVERSION},${IMAGE_NAME_CLEAN}:${MINOR}"
           fi
 
           SEMVERSION=${PACKAGEVERSION:8}  # strip off the leading 'dms-pre-'
@@ -524,8 +525,9 @@ jobs:
             # Releases get the version, plus shortened form for minor release.
             # We are not using shortened form for major or using "latest"
             # because they are too imprecise.
+            CONFIG_IMAGE_NAME_CLEAN=$(echo "${{ env.CONFIG_IMAGE_NAME }}" | sed 's/^dms-pre-//; s/^cs-pre-//')
             MINOR=`echo ${PACKAGEVERSION} | awk -F"." '{print $1"."$2}'`
-            DMSTAGS="${{ env.CONFIG_IMAGE_NAME }}:${PACKAGEVERSION},${{ env.CONFIG_IMAGE_NAME }}:${MINOR}"
+            DMSTAGS="${CONFIG_IMAGE_NAME_CLEAN}:${PACKAGEVERSION},${CONFIG_IMAGE_NAME_CLEAN}:${MINOR}"
           fi
 
           SEMVERSION=${PACKAGEVERSION:7}  # strip off the leading 'cs-pre-'
