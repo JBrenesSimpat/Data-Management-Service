@@ -107,11 +107,7 @@ async Task RetrieveAndCacheClaimSets(WebApplication app)
     }
     catch (Exception ex)
     {
-        // Aim to cache the claim set list during the application's startup
-        // process. However, if caching fails for any reason, we do not prevent
-        // DMS from loading. This approach is intended to optimize the process
-        // of loading claims set list from Configuration service without
-        // impacting the application's availability.
+
         app.Logger.LogCritical(ex, "Retrieving and caching required claim sets failure");
     }
 }
