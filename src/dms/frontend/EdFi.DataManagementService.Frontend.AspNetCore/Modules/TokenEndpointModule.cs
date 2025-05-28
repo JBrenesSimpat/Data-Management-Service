@@ -30,7 +30,7 @@ public class TokenEndpointModule : IEndpointModule
         IOptions<AppSettings> appSettings,
         IOAuthManager oAuthManager,
         ILogger<TokenEndpointModule> logger,
-        IHttpClientFactory httpClientFactory
+        IHttpClientFactory httpClientFactory,
     )
     {
         await GenerateToken(httpContext, tokenRequest, appSettings, oAuthManager, logger, httpClientFactory);
